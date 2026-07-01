@@ -1,0 +1,44 @@
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+
+# 1. Create a simple sample dataset (Text and Labels: 0 for Safe, 1 for Spam)
+data = {
+    "text": [
+        "Hey, are we still meeting for lunch today?",
+        "CONGRATULATIONS! You won a free thousand dollar gift card! Click here now!",
+        "Can you please send me the project report by tomorrow afternoon?",
+        "URGENT: Your account balance is low. Verify your password at this link.",
+        "Don't forget to buy milk on your way home.",
+        "Get cheap luxury watches online! Massive discounts today only!",
+    ],
+    "label":,
+}
+
+df = pd.DataFrame(data)
+
+# 2. Split data into features (X) and targets (y)
+X = df["text"]
+y = df["label"]
+
+# 3. Convert text sentences into numbers that the AI can understand
+vectorizer = CountVectorizer()
+X_converted = vectorizer.fit_transform(X)
+
+# 4. Train the AI model using a simple mathematical formula (Naive Bayes)
+model = MultinomialNB()
+model.fit(X_converted, y)
+
+# 5. Test the AI with a brand new email
+new_email = ["Click here to claim your free reward right now!"]
+new_email_converted = vectorizer.transform(new_email)
+
+# 6. Get the prediction
+prediction = model.predict(new_email_converted)
+
+# 7. Print the final result
+if prediction[0] == 1:
+    print("Result: This email is SPAM!")
+else:
+    print("Result: This email is SAFE.")
